@@ -6,7 +6,7 @@
     "default_popup": "popup.html"
   },
   "oauth2": {
-    "client_id": "",
+    "client_id": "544984137623-eharrjknji8b66hnp9q45tmgl382ovf2.apps.googleusercontent.com",
     "scopes": [
       "email",
       "https://www.googleapis.com/auth/calendar.readonly"
