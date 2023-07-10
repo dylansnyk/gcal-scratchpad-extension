@@ -1,6 +1,6 @@
 # Activity Extension
 
-![gcal-spad-clip](https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/23590190-ab96-44b9-abb2-cca0afed7b0f)
+![clip-gif](https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/0efaa8a4-ed8d-452b-9b82-7c4b3824d232)
 
 ## Getting Started (Test)
 
