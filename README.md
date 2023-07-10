@@ -1,6 +1,6 @@
 # Activity Extension
 
-![gcal-spag-clip](https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/23590190-ab96-44b9-abb2-cca0afed7b0f)
+![gcal-spad-clip](https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/23590190-ab96-44b9-abb2-cca0afed7b0f)
 
 ## Getting Started (Test)
 
@@ -23,3 +23,14 @@ Opportunity linking is based on the email domains of the attendees and the "Webs
 5. Paste the ID into the extension:
 <p align="center"><img width="600" alt="Screen Shot 2023-06-30 at 11 49 13 AM" src="https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/8baa06ee-01ad-49f7-91e2-d2203f4e1ef4"></p>
 
+## How it works
+
+The extension authenticates with Google Calendar through a standard OAuth flow to fetch the list of calendar events from the given date. The Scratchpad auth token is fetched from the cookies to make Scratchpad API calls.
+
+First, the list of calendar events are fetched. There is some filtering that will happen to only display relevant events. For example, only accepted events are displayed.
+
+When the events are fetched, the extension attempts to infer the activity type and link the opportunity. The activity type is based on the title of the event and the opportunity is linked based on the email domain of the attendees. If either of those could not be determined you can still create the event, but you'll need to manually fill in these fields afterward. A preview will be given so you know what these fields will be:
+
+<p align="center"><img width="421" alt="image" src="https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/88ae9034-dbb0-4c6a-b5e8-9f918c9e5984"></p>
+
+Once you select which calendar events you want to create activities for, clicking Create activities will iterate over the selected activities making a separate Scratchpad API call for each activity creation.
