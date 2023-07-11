@@ -7,7 +7,10 @@
 1. `git clone https://github.com/dylansnyk/gcal-scratchpad-extension`
 2. At `chrome://extensions`, enable Developer mode, click "Load unpacked" and select the root directory of the cloned repo.
 3. Pin the extension for easy access.
-4. Slack Dylan Havelock your email to add you as a test user.
+4. Slack Dylan Havelock your email to add you as a test user, and share your chrome extension ID:
+   <p align="center"><img width="400" alt="image" src="https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/3d1407de-bdce-4c33-abce-817542b1a7a1"></p>
+5. Swap the `oauth2.client_id` with the Client ID from Dylan
+6. Reload the extension
 
 ## Auto-opportunity linking
 
