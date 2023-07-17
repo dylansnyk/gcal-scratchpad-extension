@@ -56,7 +56,7 @@ createActivitiesButton.addEventListener("click", () => {
 const fetchEvents = (token) => {
 
   gcalActivities.date = document.getElementById('activityDatePicker').value
-  const url = `https://www.googleapis.com/calendar/v3/calendars/${gcalActivities.email}/events?timeMin=${gcalActivities.date}T00:00:00-05:00&timeMax=${gcalActivities.date}T23:59:59-05:00`;
+  const url = `https://www.googleapis.com/calendar/v3/calendars/${gcalActivities.email}/events?singleEvents=True&timeMin=${gcalActivities.date}T00:00:00-05:00&timeMax=${gcalActivities.date}T23:59:59-05:00`;
 
   // clear previous events
   list.innerHTML = ""
@@ -76,11 +76,9 @@ const fetchEvents = (token) => {
       .filter(event => event.summary)
       .filter(event => !event.summary.includes("Canceled"))
       .filter(event => event.organizer.self || (event.attendees && event.attendees.find(a => a.self && a.responseStatus === "accepted")))
-      .filter(event => event.start?.dateTime?.split("T")[0] === gcalActivities.date)
-      // log (events)
 
     // sort by start time
-    gcalActivities.events.sort((e1, e2) =>  e1.start.dateTime.localeCompare(e2.start.dateTime))
+    gcalActivities.events.sort((e1, e2) =>  e1.start.dateTime.split("T")[1].localeCompare(e2.start.dateTime.split("T")[1]))
 
     // display events in popup
     gcalActivities.events.forEach(event => {
