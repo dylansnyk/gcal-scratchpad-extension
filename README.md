@@ -1,4 +1,4 @@
-# Activity Extension
+# GCal Scratchpad Extension
 
 ![extension-gif](https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/0388eff8-6a6e-4d4e-a7d7-60b8f882f15c)
 
