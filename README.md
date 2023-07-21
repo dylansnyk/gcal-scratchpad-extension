@@ -2,16 +2,22 @@
 
 ![extension-gif](https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/0388eff8-6a6e-4d4e-a7d7-60b8f882f15c)
 
-## Getting Started (Test)
+## Getting Started
 
-1. `git clone https://github.com/dylansnyk/gcal-scratchpad-extension`
-2. At `chrome://extensions`, enable Developer mode, click "Load unpacked" and select the root directory of the cloned repo.
-3. Pin the extension for easy access.
-4. Slack Dylan Havelock your email to add you as a test user, and share your chrome extension ID:
-   <p align="center"><img width="400" alt="image" src="https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/4f2e0b64-524a-4b8b-bd8d-cc9ac3c51c76"></p>
+1. Go to the [GCal Scratchpad Extension](https://chrome.google.com/webstore/detail/gcal-scratchpad-extension/kcnphkoihmmfmpfnogogajojfmigemhf) in the chrome web store.
+2. Click Add to Chrome and pin the extension.
+<p align="center"><img width="250" alt="Screen Shot 2023-07-21 at 10 02 14 AM" src="https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/662a57f6-e7db-41ec-9602-32fe0cc59d1d"></p>
 
-5. Swap the `oauth2.client_id` with the Client ID from Dylan
-6. Reload the extension
+3. Open the extension and click "Get Calendar Events" which will initiate the OAuth flow.
+
+4. After selecting your Snyk Google account, Google will tell you the app isn't verified (cause it's not, yet). Click 'Advanced' then 'Go to GCal Scratchpad Extension (unsafe)'.
+<p align="center"><img width="500" alt="Screen Shot 2023-07-21 at 9 57 02 AM" src="https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/636c3e21-f305-4dce-a371-6ef8df524fca">
+</p>
+
+5. Click Allow when prompted.
+<p align="center"><img width="400" alt="Screen Shot 2023-07-21 at 9 57 37 AM" src="https://github.com/dylansnyk/gcal-scratchpad-extension/assets/94395157/5e7430c2-c1c9-4783-9848-4a48bff42b94"></p>
+
+6. Select the calendar events that you'd like to create activities from and click 'Create Activities'.
 
 ## Auto-opportunity linking
 
