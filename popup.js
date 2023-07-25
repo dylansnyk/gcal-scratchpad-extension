@@ -72,10 +72,11 @@ const fetchEvents = (token) => {
 
     // filter only for relevant events
     gcalActivities.events = data.items
-      .filter(event => event.status === "confirmed")
-      .filter(event => event.summary)
-      .filter(event => !event.summary.includes("Canceled"))
-      .filter(event => event.organizer.self || (event.attendees && event.attendees.find(a => a.self && a.responseStatus === "accepted")))
+      .filter(event => event.status === "confirmed") // only include confirmed events
+      .filter(event => event.summary) // ensure event has a summary
+      .filter(event => !event.summary.includes("Canceled")) // filter our cancelled events
+      .filter(event => event.start.dateTime && event.end.dateTime) // filter out all day events that don't have dateTimes
+      .filter(event => event.organizer.self || (event.attendees && event.attendees.find(a => a.self && a.responseStatus === "accepted"))) // only events where you organize or have accepted
 
     // sort by start time
     gcalActivities.events.sort((e1, e2) =>  e1.start.dateTime.split("T")[1].localeCompare(e2.start.dateTime.split("T")[1]))

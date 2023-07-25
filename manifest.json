@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Google Calendar Events",
-  "version": "1.0",
+  "name": "GCal Scratchpad Extension",
+  "version": "1.1",
   "action" : {
     "default_popup": "popup.html"
   },
@@ -16,7 +16,6 @@
     "cookies",
     "identity",
     "identity.email",
-    "tabs",
     "storage"
   ],
   "host_permissions": [

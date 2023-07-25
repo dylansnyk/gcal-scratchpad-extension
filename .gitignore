@@ -1,2 +1,5 @@
 .env
 .dccache
+.vscode
+.DS_Store
+*.zip
