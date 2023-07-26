@@ -119,7 +119,7 @@ const getAllOpps = async (token, callback) => {
   xhr.onload = () => {
     const res = JSON.parse(xhr.response)
   
-    res.records.forEach(record => {
+    res.records?.forEach(record => {
       gcalActivities.oppsMap[record.Account.Website_Domain__c] = record
     })
   };
