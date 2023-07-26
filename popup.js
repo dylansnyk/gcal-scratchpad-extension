@@ -201,7 +201,6 @@ const createActivity = async (event, token) => {
     });
     
     // execute request
-    var promise = new Promise(() => {});
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
@@ -215,7 +214,32 @@ const createActivity = async (event, token) => {
         label.innerHTML = `✅ ${event.summary}` 
         resolve("done")
       } else {
-        reject("failed")
+        // retry once 
+        let xhrRetry = new XMLHttpRequest();
+        xhrRetry.withCredentials = true;
+
+        xhrRetry.open("POST", "https://api.scratchpad.com/api/salesforce/create/Task");
+        xhrRetry.setRequestHeader("Authorization", `Bearer ${token}`);
+        xhrRetry.setRequestHeader("Content-Type", "application/json");
+        xhrRetry.onload = () => {
+          // log(`${xhr.status} - ${event.summary}`)
+          if (xhrRetry.status === 200) {
+            const label = document.getElementById(`${event.id}-label`)
+            label.innerHTML = `✅ ${event.summary}` 
+            resolve("done")
+          } else {
+            // retry once 
+            const label = document.getElementById(`${event.id}-label`)
+            label.innerHTML = `❌ ${event.summary}` 
+            resolve("failed")
+          }
+        }
+
+        xhrRetry.send(data);
+
+        const label = document.getElementById(`${event.id}-label`)
+        label.innerHTML = `🚧 ${event.summary}` 
+        // resolve("failed")
       }
     }
 
@@ -237,7 +261,13 @@ const displayEvent = (event) => {
   }
 
   if (activity.type) {
-    eventMarkup += `<li>${activity.type} / ${activity.subType}</li>`
+    eventMarkup += `<li>${activity.type}`
+  }
+
+  if (activity.subType) {
+    eventMarkup += ` / ${activity.subType}</li>`
+  } else {
+    eventMarkup += `</li>`
   }
 
   if (record?.Name) {
@@ -262,6 +292,7 @@ const displayEvent = (event) => {
  */
 const inferActivityType = (event) => {
   const summary = event.summary.toLowerCase()
+  const isInternal = getCustomerDomain(event) == null;
 
   if (summary.includes("demo")) {
     return {
@@ -336,6 +367,20 @@ const inferActivityType = (event) => {
     return {
       type: "Internal",
       subType: "Team and Peer Meetings"
+    }
+  }
+
+  if ((summary.includes("monthly") || summary.includes("quarterly")) && !isInternal) {
+    return {
+      type: "Account Management",
+      subType: "Customer Sync Meeting"
+    }
+  }
+
+  if (isInternal) {
+    return {
+      type: "Internal",
+      subType: null
     }
   }
 
