@@ -7,15 +7,17 @@ let createActivitiesButton = document.getElementById("createActivities")
 let gcalActivities = {
   events: [],
   oppsMap: {},
+  config: {},
   email: "",
   date: "",
   oppsViewId: ""
 }
 
-// set default value of opps view id
-chrome.storage.local.get(["oppsViewId"]).then((result) => {
-  console.log(result.oppsViewId)
+// set default value of opps view id and config
+chrome.storage.local.get(["oppsViewId", "config"]).then((result) => {
+  console.log('loaded...', result)
   gcalActivities.oppsViewId = result.oppsViewId
+  gcalActivities.config = result.config
   document.getElementById("oppsViewIdInput").value = result.oppsViewId
 });
 
@@ -41,6 +43,18 @@ document.getElementById('getCalendarEvents').addEventListener("click", () => {
     })
   })
 })
+
+// accept config file upload and save it
+document.getElementById('configFileInput').addEventListener('change', uploadEvent => {
+  const fileReader = new FileReader()
+  fileReader.onload = (event) => {
+    const config = JSON.parse(event.target.result)
+    chrome.storage.local.set({ config: config }).then(() => {
+      console.log("Value is set", { config: config });
+    });
+  }
+  fileReader.readAsText(uploadEvent.target.files[0])
+});
 
 // Create Activities in Scratchpad
 createActivitiesButton.addEventListener("click", () => {
