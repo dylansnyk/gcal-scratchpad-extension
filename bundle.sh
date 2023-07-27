@@ -11,3 +11,6 @@ cp defaultConfig.js dist
 cp *.json dist
 cp *.js dist
 cp popup.html dist
+
+# zip
+zip -r compressed_dist.zip dist

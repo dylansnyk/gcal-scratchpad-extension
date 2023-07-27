@@ -44,6 +44,12 @@ document.getElementById('getCalendarEvents').addEventListener("click", () => {
   })
 })
 
+// add spinner on file upload
+document.getElementById('configFileLabel').addEventListener('click', () => {
+  document.getElementById('configFileInput').value = null;
+  document.getElementById('configFileLabel').innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+})
+
 // accept config file upload and save it
 document.getElementById('configFileInput').addEventListener('change', uploadEvent => {
   const fileReader = new FileReader()
@@ -51,6 +57,7 @@ document.getElementById('configFileInput').addEventListener('change', uploadEven
     const config = JSON.parse(event.target.result)
     chrome.storage.local.set({ config: config }).then(() => {
       console.log("Value is set", { config: config });
+      document.getElementById('configFileLabel').innerHTML = "📁"
     });
   }
   fileReader.readAsText(uploadEvent.target.files[0])
