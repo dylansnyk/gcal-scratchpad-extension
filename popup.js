@@ -7,15 +7,17 @@ let createActivitiesButton = document.getElementById("createActivities")
 let gcalActivities = {
   events: [],
   oppsMap: {},
+  config: {},
   email: "",
   date: "",
   oppsViewId: ""
 }
 
-// set default value of opps view id
-chrome.storage.local.get(["oppsViewId"]).then((result) => {
-  console.log(result.oppsViewId)
-  gcalActivities.oppsViewId = result.oppsViewId
+// set default value of opps view id and config
+chrome.storage.local.get(["oppsViewId", "config"]).then((result) => {
+  console.log('loaded...', result);
+  gcalActivities.oppsViewId = result.oppsViewId;
+  gcalActivities.config = result.config ? result.config : defaultConfig;
   document.getElementById("oppsViewIdInput").value = result.oppsViewId
 });
 
@@ -41,6 +43,25 @@ document.getElementById('getCalendarEvents').addEventListener("click", () => {
     })
   })
 })
+
+// add spinner on file upload
+document.getElementById('configFileLabel').addEventListener('click', () => {
+  document.getElementById('configFileInput').value = null;
+  document.getElementById('configFileLabel').innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+})
+
+// accept config file upload and save it
+document.getElementById('configFileInput').addEventListener('change', uploadEvent => {
+  const fileReader = new FileReader()
+  fileReader.onload = (event) => {
+    const config = JSON.parse(event.target.result)
+    chrome.storage.local.set({ config: config }).then(() => {
+      console.log("Value is set", { config: config });
+      document.getElementById('configFileLabel').innerHTML = "📁"
+    });
+  }
+  fileReader.readAsText(uploadEvent.target.files[0])
+});
 
 // Create Activities in Scratchpad
 createActivitiesButton.addEventListener("click", () => {
