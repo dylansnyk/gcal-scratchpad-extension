@@ -53,7 +53,8 @@ const inferActivityType = (event) => {
 
   for (let i = 0; i < mappings.length; i++) {
     let mapping = mappings[i]
-    if (mapping.summary?.some(keyword => summary.includes(keyword))) {
+    let mappingIsInternal = mapping.isInternal ? mapping.isInternal : false
+    if (mapping.summary?.some(keyword => summary.includes(keyword)) && mappingIsInternal == isInternal) {
       return mapping.activity
     }
   }

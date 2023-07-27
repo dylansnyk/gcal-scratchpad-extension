@@ -15,9 +15,9 @@ let gcalActivities = {
 
 // set default value of opps view id and config
 chrome.storage.local.get(["oppsViewId", "config"]).then((result) => {
-  console.log('loaded...', result)
-  gcalActivities.oppsViewId = result.oppsViewId
-  gcalActivities.config = result.config
+  console.log('loaded...', result);
+  gcalActivities.oppsViewId = result.oppsViewId;
+  gcalActivities.config = result.config ? result.config : defaultConfig;
   document.getElementById("oppsViewIdInput").value = result.oppsViewId
 });
 
